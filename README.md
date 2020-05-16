@@ -12,4 +12,4 @@ ssss **bold*** iii
 
 <a href='www.bing.com'>a website</a>
 
-<img src='HSC.png'/>
+<img src="./HSC.png" />
