@@ -1,6 +1,7 @@
-# An interpretable deep-learning architecture of capsule networks for identifying cellular-type gene expression programs from single-cell RNA-seq data
+## An interpretable deep-learning architecture of capsule networks for identifying cellular-type gene expression programs from single-cell RNA-seq data
 
 This repository contains the official Keras implementation of:
+
 **An interpretable deep-learning architecture of capsule networks for identifying cellular-type gene expression programs from single-cell RNA-seq data**
 
 **Requirements**
@@ -10,6 +11,7 @@ This repository contains the official Keras implementation of:
 - tensorflow 1.11.0
 
 **Model training**
+
 To unzip the PBMC_data.rar into current directionary then run:
 
 ```
