@@ -27,6 +27,19 @@ The following documents contain the codes for reproducing Figure in the main tex
 demo_reproducing_figures.ipynb
 ```
 
+
+**Comparison Model**
+SVM,RF,LDA,KNN
+```
+cd comparison_model
+python Machine_Learning.py
+```
+Neural Networks
+```
+cd comparison_model
+python Neural_Networks.py
+```
+
 <a href='www.bing.com'>a website</a>
 
 

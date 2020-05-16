@@ -13,12 +13,12 @@ import argparse
 
 
 # configuration
-parser = argparse.ArgumentParser(description='reconstruct the gene regulatory network')
+parser = argparse.ArgumentParser(description='scCapsNet')
 # system config
 parser.add_argument('--inputdata', type=str, default='data/PBMC_data.npy', help='address for input data')
-parser.add_argument('--inputcelltype', type=str, default='data/PBMC_celltype.npy', help='xxx')
-parser.add_argument('--num_classes', type=int, default=8, help='xxx')
-parser.add_argument('--randoms', type=int, default=30, help='xxx')
+parser.add_argument('--inputcelltype', type=str, default='data/PBMC_celltype.npy', help='address for celltype label')
+parser.add_argument('--num_classes', type=int, default=8, help='number of cell type')
+parser.add_argument('--randoms', type=int, default=30, help='random number to split dataset')
 args = parser.parse_args()
 
 
