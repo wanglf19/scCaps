@@ -9,11 +9,23 @@ from keras.layers import *
 from keras import backend as K
 from sklearn.model_selection import train_test_split
 import sys
+import argparse
 
-inputdata = sys.argv[1]
-inputcelltype = sys.argv[2]
-num_classes = int(sys.argv[3])
-randoms = int(sys.argv[4])
+
+# configuration
+parser = argparse.ArgumentParser(description='reconstruct the gene regulatory network')
+# system config
+parser.add_argument('--inputdata', type=str, default='data/PBMC_data.npy', help='address for input data')
+parser.add_argument('--inputcelltype', type=str, default='data/PBMC_celltype.npy', help='xxx')
+parser.add_argument('--num_classes', type=int, default=8, help='xxx')
+parser.add_argument('--randoms', type=int, default=30, help='xxx')
+args = parser.parse_args()
+
+
+inputdata = args.inputdata
+inputcelltype = args.inputcelltype
+num_classes = args.num_classes
+randoms = args.randoms
 
 data = np.load(inputdata)
 labels = np.load(inputcelltype)
