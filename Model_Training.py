@@ -47,14 +47,14 @@ print(input_size)
 
 x_in = Input(shape=(input_size,))
 x = x_in
-x_all = list(np.zeros((num_classes,1)))
+x_all = list(np.zeros((num_capsule,1)))
 encoders = []
-for i in range(num_classes):
+for i in range(num_capsule):
     x_all[i] = Dense(z_dim, activation='relu')(x_in)
     encoders.append(Model(x_in, x_all[i]))
 
 x = Concatenate()(x_all)
-x = Reshape((num_classes, z_dim))(x)
+x = Reshape((num_capsule, z_dim))(x)
 capsule = Capsule(num_classes, z_dim, 3, False)(x)
 output = Lambda(lambda x: K.sqrt(K.sum(K.square(x), 2)), output_shape=(num_classes,))(capsule)
 
@@ -71,4 +71,4 @@ model.fit(x_train, y_train,
           verbose=1,
           validation_data=(x_test, y_test))
 
-model.save_weights('Modelweight.weight')
+model.save_weights('Modelweight.weights')

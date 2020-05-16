@@ -5,7 +5,8 @@ This repository contains the official Keras implementation of:
 **An interpretable deep-learning architecture of capsule networks for identifying cellular-type gene expression programs from single-cell RNA-seq data**
 
 
-###Requirements
+
+**Requirements**
 - Python 3.6
 - conda 4.4.10
 - keras 2.2.4
@@ -14,7 +15,7 @@ This repository contains the official Keras implementation of:
 
 **Model training**
 
-To unzip the PBMC_data.rar into current directionary then run:
+To unzip the PBMC_data.rar into data directionary then run:
 
 ```
 default:
@@ -35,13 +36,7 @@ python Model_Training.py --randoms 20 --dim_capsule 32
 
 **Model analysis**
 
-
-
-
-
-
-
-**Demo**
+- Demo
 
 The following documents contain the codes for reproducing Figure in the main text.
 ```
@@ -62,7 +57,4 @@ Neural Networks
 cd comparison_model
 python Neural_Networks.py
 ```
-
-<a href='www.bing.com'>a website</a>
-
 
