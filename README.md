@@ -18,6 +18,10 @@ This repository contains the official Keras implementation of:
 To unzip the PBMC_data.rar into data directionary then run:
 
 ```
+old version
+old_files/Model_Training.py
+
+new version
 default:
 python Model_Training.py
 
@@ -36,7 +40,7 @@ python Model_Training.py --randoms 20 --dim_capsule 32
 
 **Model analysis**
 
-- Demo
+- *Demo*
 
 The following documents contain the codes for reproducing Figure in the main text.
 ```
@@ -46,13 +50,13 @@ demo_reproducing_figures.ipynb
 
 **Comparison Model**
 
-SVM,RF,LDA,KNN
+- SVM,RF,LDA,KNN
 ```
 cd comparison_model
 python Machine_Learning.py
 ```
 
-Neural Networks
+- Neural Networks
 ```
 cd comparison_model
 python Neural_Networks.py
