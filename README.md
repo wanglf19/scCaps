@@ -67,3 +67,5 @@ cd comparison_model
 python Neural_Networks.py
 ```
 
+**capsule networks implementation**
+the capsule parts refer to https://github.com/bojone/Capsule and https://kexue.fm/archives/5112
