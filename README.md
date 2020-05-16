@@ -18,11 +18,15 @@ To unzip the PBMC_data.rar into current directionary then run:
 
 ```
 python Model_Training.py
-        --
-        --
 ```
 
+**Demo**
+
+The following documents contain the codes for reproducing Figure in the main text.
+```
+demo_reproducing_figures.ipynb
+```
 
 <a href='www.bing.com'>a website</a>
 
-<img src="./HSC.png" />
+
