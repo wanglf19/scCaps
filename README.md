@@ -6,14 +6,14 @@ This repository contains the official Keras implementation of:
 
 
 
-##**Requirements**
+**Requirements**
 - Python 3.6
 - conda 4.4.10
 - keras 2.2.4
 - tensorflow 1.11.0
 
 
-##**Model training**
+**1. Model training**
 
 To unzip the PBMC_data.rar into dictionary 'data' then run:
 
@@ -52,7 +52,7 @@ Augments:
 python FE_Model_Training --randoms 20 --dim_capsule 32
 ```
 
-**Model analysis**
+**2. Model analysis**
 
 - *Demo About this article*
 
@@ -70,6 +70,7 @@ python Fig5D.py
 
 - *Future exploration*
 ```
+- *1. heatmap for coupling coefficients, relationship between primary capsule and type capsule*
 python FE_Model_analysis_1.py
 
 Augments:
@@ -81,6 +82,7 @@ Augments:
 '--num_capsule', type=int, default=16, help='number of the primary capsule'
 '--weights', type=str, default='Modelweight.weights', help='trained weights'
 
+- *2. select genes along one principle component for a specific primary capsule*
 python FE_Model_analysis_2.py
 
 Augments:
@@ -96,7 +98,7 @@ Augments:
 '--Cell_type', type=int, default=-1, help='indicate which cell type will be analyzed'
 ```
 
-**Comparison Model**
+**3. Comparison Model**
 
 - SVM,RF,LDA,KNN
 ```

@@ -68,7 +68,7 @@ model.load_weights(args.weights)
 
 
 ###################################################################################################
-#2 heatmap for ccoupling coefficients
+#2 heatmap for coupling coefficients
 Y_pred = model.predict(x_test)
 
 coupling_coefficients_value = {}
