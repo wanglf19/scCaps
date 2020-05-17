@@ -35,11 +35,8 @@ randoms = args.randoms
 z_dim = args.dim_capsule
 num_capsule = args.num_capsule
 PC = args.PC-1
-PC = 0
 Primary_capsule = args.Primary_capsule
-Primary_capsule = 3
 Cell_type = args.Cell_type
-Cell_type = 7
 
 data = np.load(inputdata)
 labels = np.load(inputcelltype)
