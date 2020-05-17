@@ -19,38 +19,38 @@ To unzip the PBMC_data.rar into dictionary 'data' then run:
 
 - *About this article*
 ```
-- default:
+#- default:
 python Model_Training.py
 
-Augments:
-'--inputdata', type=str, default='data/PBMC_data.npy', help='address for input data')
-'--inputcelltype', type=str, default='data/PBMC_celltype.npy', help='address for celltype label')
-'--num_classes', type=int, default=8, help='number of cell type')
-'--randoms', type=int, default=30, help='random number to split dataset')
+#Augments:
+#'--inputdata', type=str, default='data/PBMC_data.npy', help='address for input data')
+#'--inputcelltype', type=str, default='data/PBMC_celltype.npy', help='address for celltype label')
+#'--num_classes', type=int, default=8, help='number of cell type')
+#'--randoms', type=int, default=30, help='random number to split dataset')
 
-- with augments
+#- with augments
 python Model_Training.py --randoms 20
 
 ```
 
 - *Future exploration*
 ```
-- default:
+#- default:
 python FE_Model_Training.py
 
-Augments:
-'--inputdata', type=str, default='data/PBMC_data.npy', help='address for input data'
-'--inputcelltype', type=str, default='data/PBMC_celltype.npy', help='address for celltype label'
-'--num_classes', type=int, default=8, help='number of cell type'
-'--randoms', type=int, default=30, help='random number to split dataset into training and testing set'
-'--dim_capsule', type=int, default=16, help='dimension of the capsule'
-'--num_capsule', type=int, default=16, help='number of the primary capsule'
-'--batch_size', type=int, default=400, help='training parameters batch_size'
-'--epochs', type=int, default=10, help='training parameters epochs'
-'--Model_weights', type=str, default='Modelweight.weights', help='Model_weight'
+#Augments:
+#'--inputdata', type=str, default='data/PBMC_data.npy', help='address for input data'
+#'--inputcelltype', type=str, default='data/PBMC_celltype.npy', help='address for celltype label'
+#'--num_classes', type=int, default=8, help='number of cell type'
+#'--randoms', type=int, default=30, help='random number to split dataset into training and testing set'
+#'--dim_capsule', type=int, default=16, help='dimension of the capsule'
+#'--num_capsule', type=int, default=16, help='number of the primary capsule'
+#'--batch_size', type=int, default=400, help='training parameters batch_size'
+#'--epochs', type=int, default=10, help='training parameters epochs'
+#'--Model_weights', type=str, default='Modelweight.weights', help='Model_weight'
 
 
-- with augments
+#- with augments
 python FE_Model_Training --randoms 20 --dim_capsule 32
 ```
 
@@ -72,34 +72,34 @@ python Fig5D.py
 
 - *Future exploration*
 ```
-- 1. heatmap for coupling coefficients, relationship between primary capsule and type capsule
+#- 1. heatmap for coupling coefficients, relationship between primary capsule and type capsule
 
 python FE_Model_analysis_1.py
 
-Augments:
-'--inputdata', type=str, default='data/PBMC_data.npy', help='address for input data'
-'--inputcelltype', type=str, default='data/PBMC_celltype.npy', help='address for celltype label'
-'--num_classes', type=int, default=8, help='number of cell type'
-'--randoms', type=int, default=30, help='random number to split dataset'
-'--dim_capsule', type=int, default=16, help='dimension of the capsule'
-'--num_capsule', type=int, default=16, help='number of the primary capsule'
-'--weights', type=str, default='Modelweight.weights', help='trained weights'
+#Augments:
+#'--inputdata', type=str, default='data/PBMC_data.npy', help='address for input data'
+#'--inputcelltype', type=str, default='data/PBMC_celltype.npy', help='address for celltype label'
+#'--num_classes', type=int, default=8, help='number of cell type'
+#'--randoms', type=int, default=30, help='random number to split dataset'
+#'--dim_capsule', type=int, default=16, help='dimension of the capsule'
+#'--num_capsule', type=int, default=16, help='number of the primary capsule'
+#'--weights', type=str, default='Modelweight.weights', help='trained weights'
 
-- 2. select genes along one principle component for a specific primary capsule according to the heatmap
+#- 2. select genes along one principle component for a specific primary capsule according to the heatmap
 
 python FE_Model_analysis_2.py
 
-Augments:
-'--inputdata', type=str, default='data/PBMC_data.npy', help='address for input data'
-'--inputcelltype', type=str, default='data/PBMC_celltype.npy', help='address for celltype label'
-'--num_classes', type=int, default=8, help='number of cell type'
-'--randoms', type=int, default=30, help='random number to split dataset'
-'--dim_capsule', type=int, default=16, help='dimension of the capsule'
-'--num_capsule', type=int, default=16, help='number of the primary capsule'
-'--weights', type=str, default='Modelweight.weights', help='trained weights'
-'--PC', type=int, default=1, help='indicate which principle component will be analyzed '
-'--Primary_capsule', type=int, default=4, help='indicate which primary capsule will be analyzed'
-'--Cell_type', type=int, default=-1, help='indicate which cell type will be analyzed'
+#Augments:
+#'--inputdata', type=str, default='data/PBMC_data.npy', help='address for input data'
+#'--inputcelltype', type=str, default='data/PBMC_celltype.npy', help='address for celltype label'
+#'--num_classes', type=int, default=8, help='number of cell type'
+#'--randoms', type=int, default=30, help='random number to split dataset'
+#'--dim_capsule', type=int, default=16, help='dimension of the capsule'
+#'--num_capsule', type=int, default=16, help='number of the primary capsule'
+#'--weights', type=str, default='Modelweight.weights', help='trained weights'
+#'--PC', type=int, default=1, help='indicate which principle component will be analyzed '
+#'--Primary_capsule', type=int, default=4, help='indicate which primary capsule will be analyzed'
+#'--Cell_type', type=int, default=-1, help='indicate which cell type will be analyzed'
 ```
 
 **3. Comparison Model**
