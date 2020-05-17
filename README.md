@@ -6,14 +6,14 @@ This repository contains the official Keras implementation of:
 
 
 
-**Requirements**
+##**Requirements**
 - Python 3.6
 - conda 4.4.10
 - keras 2.2.4
 - tensorflow 1.11.0
 
 
-**Model training**
+##**Model training**
 
 To unzip the PBMC_data.rar into dictionary 'data' then run:
 
