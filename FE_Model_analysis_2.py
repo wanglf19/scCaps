@@ -93,6 +93,7 @@ ratio_plot = np.zeros((num_classes, 31))
 difference = (np.max(weightpca[:, PC]) - np.min(weightpca[:, PC])) / 30
 print(np.max(weightpca[:, PC]), np.min(weightpca[:, PC]))
 
+
 ###################################################################################################
 #2.1 select genes from maximum to minimum
 
@@ -142,6 +143,7 @@ for j in range(31):
                 dotted_line = j
 
 #plot
+plt.subplot(2,2,1)
 for i in range(num_classes):
     plt.plot(ratio_plot[i], c=color[i], label = str(i))
 if dotted_line > 0:
@@ -150,22 +152,25 @@ if dotted_line > 0:
 plt.legend(loc='lower left')
 plt.xlabel('Masking genes along PC'+ str(PC+1))
 plt.ylabel('Prediction accuracy(%)')
-plt.title('Min2Max Primary Capsule'+ ' '+ str(Primary_capsule) +'-Type'+ str(Cell_type) )
-plt.show()
+plt.title('Max2Min Primary Capsule'+ ' '+ str(Primary_capsule) +'-Type'+ str(Cell_type) )
+#plt.show()
 
 #scatter plot
+plt.subplot(2,2,2)
 plt.scatter(weightpca[:, 0], weightpca[:, 1],color='r', s=5,alpha=0.5,label = 'gene')
+if dotted_line < 0:
+    select_genes = []
 plt.scatter(weightpca[select_genes, 0], weightpca[select_genes, 1], color = 'b',s=6,label = 'select_gene')
 plt.legend(loc='lower left')
 
 plt.ylabel('PC2', fontsize=10)
 plt.xlabel('PC1', fontsize=10)
-plt.title('Max2Min Primary Capsule'+ ' '+ str(Primary_capsule))
-plt.show()
+plt.title('Max2Min Primary Capsule'+ ' '+ str(Primary_capsule) +'-Type'+ str(Cell_type) )
+#plt.show()
 
 
 ###################################################################################################
-#2.1 select genes from minimum to maximum
+#2.2 select genes from minimum to maximum
 
 #line plot
 x_new_test = copy.deepcopy(x_test)
@@ -213,6 +218,7 @@ for j in range(31):
             dotted_line = j
 
 #plot
+plt.subplot(2,2,3)
 for i in range(num_classes):
     plt.plot(ratio_plot[i], c=color[i], label = str(i))
 
@@ -223,13 +229,16 @@ plt.legend(loc='lower left')
 plt.xlabel('Masking genes along PC'+ str(PC+1))
 plt.ylabel('Prediction accuracy(%)')
 plt.title('Min2Max Primary Capsule'+ ' '+ str(Primary_capsule) +'-Type'+ str(Cell_type) )
-plt.show()
+#plt.show()
 
 #scatter plot
+plt.subplot(2,2,4)
 plt.scatter(weightpca[:, 0], weightpca[:, 1],color='r', s=5,alpha=0.5,label = 'gene')
+if dotted_line < 0:
+    select_genes = []
 plt.scatter(weightpca[select_genes, 0], weightpca[select_genes, 1], color = 'b',s=6,label = 'select_gene')
 plt.legend(loc='lower left')
 plt.ylabel('PC2', fontsize=10)
 plt.xlabel('PC1', fontsize=10)
-plt.title('Max2Min Primary Capsule'+ ' '+ str(Primary_capsule))
+plt.title('Min2Max Primary Capsule'+ ' '+ str(Primary_capsule) +'-Type'+ str(Cell_type) )
 plt.show()
