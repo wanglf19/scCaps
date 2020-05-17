@@ -70,7 +70,7 @@ python Fig5D.py
 
 - *Future exploration*
 ```
-- *1. heatmap for coupling coefficients, relationship between primary capsule and type capsule*
+- 1. heatmap for coupling coefficients, relationship between primary capsule and type capsule
 python FE_Model_analysis_1.py
 
 Augments:
@@ -82,7 +82,7 @@ Augments:
 '--num_capsule', type=int, default=16, help='number of the primary capsule'
 '--weights', type=str, default='Modelweight.weights', help='trained weights'
 
-- *2. select genes along one principle component for a specific primary capsule*
+- 2. select genes along one principle component for a specific primary capsule
 python FE_Model_analysis_2.py
 
 Augments:
