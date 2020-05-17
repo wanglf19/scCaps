@@ -11,21 +11,30 @@ from sklearn.model_selection import train_test_split
 import sys
 import argparse
 
-
-# configuration
 parser = argparse.ArgumentParser(description='scCapsNet')
 # system config
 parser.add_argument('--inputdata', type=str, default='data/PBMC_data.npy', help='address for input data')
 parser.add_argument('--inputcelltype', type=str, default='data/PBMC_celltype.npy', help='address for celltype label')
 parser.add_argument('--num_classes', type=int, default=8, help='number of cell type')
 parser.add_argument('--randoms', type=int, default=30, help='random number to split dataset')
-args = parser.parse_args()
+parser.add_argument('--dim_capsule', type=int, default=16, help='dimension of the capsule')
+parser.add_argument('--num_capsule', type=int, default=16, help='number of the primary capsule')
+parser.add_argument('--batch_size', type=int, default=400, help='training parameters_batch_size')
+parser.add_argument('--epochs', type=int, default=10, help='training parameters_epochs')
+parser.add_argument('--Model_weights', type=str, default='Modelweight.weights', help='Model_weight')
 
+
+args = parser.parse_args()
 
 inputdata = args.inputdata
 inputcelltype = args.inputcelltype
 num_classes = args.num_classes
 randoms = args.randoms
+z_dim = args.dim_capsule
+num_capsule = args.num_capsule
+epochs = args.epochs
+batch_size = args.batch_size
+Model_weights = args.Model_weights
 
 data = np.load(inputdata)
 labels = np.load(inputcelltype)
@@ -35,31 +44,21 @@ Y_test = y_test
 y_train = utils.to_categorical(y_train, num_classes)
 y_test = utils.to_categorical(y_test, num_classes)
 
-z_dim = 16
 
 input_size = x_train.shape[1]
+print(input_size)
+
 x_in = Input(shape=(input_size,))
 x = x_in
-x1 = Dense(z_dim, activation='relu')(x_in)
-x2 = Dense(z_dim, activation='relu')(x_in)
-x3 = Dense(z_dim, activation='relu')(x_in)
-x4 = Dense(z_dim, activation='relu')(x_in)
-x5 = Dense(z_dim, activation='relu')(x_in)
-x6 = Dense(z_dim, activation='relu')(x_in)
-x7 = Dense(z_dim, activation='relu')(x_in)
-x8 = Dense(z_dim, activation='relu')(x_in)
-x9 = Dense(z_dim, activation='relu')(x_in)
-x10 = Dense(z_dim, activation='relu')(x_in)
-x11 = Dense(z_dim, activation='relu')(x_in)
-x12 = Dense(z_dim, activation='relu')(x_in)
-x13 = Dense(z_dim, activation='relu')(x_in)
-x14 = Dense(z_dim, activation='relu')(x_in)
-x15 = Dense(z_dim, activation='relu')(x_in)
-x16 = Dense(z_dim, activation='relu')(x_in)
+x_all = list(np.zeros((num_capsule,1)))
+encoders = []
+for i in range(num_capsule):
+    x_all[i] = Dense(z_dim, activation='relu')(x_in)
+    encoders.append(Model(x_in, x_all[i]))
 
-x = Concatenate()([x1, x2, x3, x4, x5, x6, x7, x8, x9, x10, x11, x12, x13, x14, x15, x16])
-x = Reshape((16, z_dim))(x)
-capsule = Capsule(num_classes, 16, 3, False)(x) 
+x = Concatenate()(x_all)
+x = Reshape((num_capsule, z_dim))(x)
+capsule = Capsule(num_classes, z_dim, 3, False)(x)
 output = Lambda(lambda x: K.sqrt(K.sum(K.square(x), 2)), output_shape=(num_classes,))(capsule)
 
 model = Model(inputs=x_in, outputs=output)
@@ -70,9 +69,9 @@ model.compile(loss=lambda y_true,y_pred: y_true*K.relu(0.9-y_pred)**2 + 0.25*(1-
 model.summary()
 
 model.fit(x_train, y_train,
-          batch_size=400,
-          epochs=10,
+          batch_size=batch_size,
+          epochs=epochs,
           verbose=1,
           validation_data=(x_test, y_test))
 
-model.save_weights('Modelweight.weight')
+model.save_weights(Model_weights)
