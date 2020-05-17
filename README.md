@@ -33,7 +33,7 @@ python Model_Training.py --randoms 20
 
 ```
 
-- *Future exploration*
+- *Further Explore*
 ```
 #- default:
 python FE_Model_Training.py
@@ -56,7 +56,7 @@ python FE_Model_Training --randoms 20 --dim_capsule 32
 
 **2. Model analysis**
 
-- *Demo About this article*
+- *Demo -- About this article*
 
 The following documents (Jupyter Notebook) contain the codes for reproducing Figure in the main text.
 ```
@@ -70,7 +70,7 @@ python Fig4.py
 python Fig5D.py
 ```
 
-- *Future exploration*
+- *Further Explore*
 ```
 #- 1. heatmap for coupling coefficients, relationship between primary capsule and type capsule
 
