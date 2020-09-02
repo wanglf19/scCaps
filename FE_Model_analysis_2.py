@@ -28,6 +28,7 @@ parser.add_argument('--Cell_type', type=int, default=-1, help='indicate which ce
 
 args = parser.parse_args()
 
+print("Loading...")
 inputdata = args.inputdata
 inputcelltype = args.inputcelltype
 num_classes = args.num_classes
@@ -68,8 +69,7 @@ model.compile(loss=lambda y_true,y_pred: y_true*K.relu(0.9-y_pred)**2 + 0.25*(1-
               optimizer='adam',
               metrics=['accuracy'])
 
-model.summary()
-
+#model.summary()
 model.load_weights(args.weights)
 
 ###################################################################################################
@@ -91,20 +91,22 @@ weightpca = pca.transform(totalweight)
 #Fragmentation to facilitate computation
 ratio_plot = np.zeros((num_classes, 31))
 difference = (np.max(weightpca[:, PC]) - np.min(weightpca[:, PC])) / 30
-print(np.max(weightpca[:, PC]), np.min(weightpca[:, PC]))
+#print(np.max(weightpca[:, PC]), np.min(weightpca[:, PC]))
 
 
 ###################################################################################################
 #2.1 select genes from maximum to minimum
-
+print("select genes from maximum to minimum...")
 #line plot
 x_new_test = copy.deepcopy(x_test)
 select_genes = []
 dotted_line = -1
 
 #calculate the prediction accuracy
+plot_x = []
 for j in range(31):
-    print(j)
+    #print(j)
+    plot_x.append(np.max(weightpca[:, PC]) - difference * j)
     # sub A select genes
     gene_count = 0
     for i in range(input_size):
@@ -116,7 +118,7 @@ for j in range(31):
             if dotted_line<0:
                 select_genes.append(i)
 
-    print(gene_count)
+    #print(gene_count)
     # sub B calculate the accuracy
     Y_pred = model.predict(x_new_test)
     Y_pred_order = np.argsort(Y_pred, axis=1)
@@ -143,12 +145,15 @@ for j in range(31):
                 dotted_line = j
 
 #plot
-plt.subplot(2,2,1)
+plt.figure(figsize=(20,12))
+ax = plt.subplot(2,2,1)
 for i in range(num_classes):
-    plt.plot(ratio_plot[i], c=color[i], label = str(i))
+    plt.plot(plot_x,ratio_plot[i], c=color[i], label = str(i))
 if dotted_line > 0:
-    plt.plot([dotted_line,dotted_line],[1.0,0], 'k--',linewidth=3.0)
+    dotted_line_pos = np.max(weightpca[:, PC]) - difference * dotted_line
+    plt.plot([dotted_line_pos,dotted_line_pos],[1.0,0], 'k--',linewidth=3.0)
 
+ax.invert_xaxis()
 plt.legend(loc='lower left')
 plt.xlabel('Masking genes along PC'+ str(PC+1))
 plt.ylabel('Prediction accuracy(%)')
@@ -160,6 +165,8 @@ plt.subplot(2,2,2)
 plt.scatter(weightpca[:, 0], weightpca[:, 1],color='r', s=5,alpha=0.5,label = 'gene')
 if dotted_line < 0:
     select_genes = []
+
+np.save("Max2Min_genes.npy",np.asarray(select_genes))
 plt.scatter(weightpca[select_genes, 0], weightpca[select_genes, 1], color = 'b',s=6,label = 'select_gene')
 plt.legend(loc='lower left')
 
@@ -171,15 +178,17 @@ plt.title('Max2Min Primary Capsule'+ ' '+ str(Primary_capsule) +'-Type'+ str(Cel
 
 ###################################################################################################
 #2.2 select genes from minimum to maximum
-
+print("select genes from minimum to maximum...")
 #line plot
 x_new_test = copy.deepcopy(x_test)
 select_genes = []
 dotted_line = -1
 
 #calculate the prediction accuracy
+plot_x = []
 for j in range(31):
-    print(j)
+    #print(j)
+    plot_x.append(np.min(weightpca[:, PC]) + difference * j)
     # sub A select genes
     gene_count = 0
     for i in range(input_size):
@@ -191,7 +200,7 @@ for j in range(31):
             if dotted_line < 0:
                 select_genes.append(i)
 
-    print(gene_count)
+    #print(gene_count)
     # sub B calculate the accuracy
     Y_pred = model.predict(x_new_test)
     Y_pred_order = np.argsort(Y_pred, axis=1)
@@ -218,12 +227,14 @@ for j in range(31):
             dotted_line = j
 
 #plot
-plt.subplot(2,2,3)
+ax= plt.subplot(2,2,3)
 for i in range(num_classes):
-    plt.plot(ratio_plot[i], c=color[i], label = str(i))
+    plt.plot(plot_x, ratio_plot[i], c=color[i], label = str(i))
 
 if dotted_line > 0:
-    plt.plot([dotted_line,dotted_line],[1.0,0], 'k--',linewidth=3.0)
+    dotted_line_pos = np.min(weightpca[:, PC]) + difference * dotted_line
+    plt.plot([dotted_line_pos,dotted_line_pos],[1.0,0], 'k--',linewidth=3.0)
+
 
 plt.legend(loc='lower left')
 plt.xlabel('Masking genes along PC'+ str(PC+1))
@@ -236,9 +247,12 @@ plt.subplot(2,2,4)
 plt.scatter(weightpca[:, 0], weightpca[:, 1],color='r', s=5,alpha=0.5,label = 'gene')
 if dotted_line < 0:
     select_genes = []
+np.save("Min2Max_genes.npy",np.asarray(select_genes))
 plt.scatter(weightpca[select_genes, 0], weightpca[select_genes, 1], color = 'b',s=6,label = 'select_gene')
 plt.legend(loc='lower left')
 plt.ylabel('PC2', fontsize=10)
 plt.xlabel('PC1', fontsize=10)
 plt.title('Min2Max Primary Capsule'+ ' '+ str(Primary_capsule) +'-Type'+ str(Cell_type) )
+
+plt.savefig("FE_Model_analysis_2_resutls.png")
 plt.show()

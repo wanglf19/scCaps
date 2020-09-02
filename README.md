@@ -85,6 +85,10 @@ python FE_Model_analysis_1.py
 #'--num_capsule', type=int, default=16, help='number of the primary capsule'
 #'--weights', type=str, default='Modelweight.weights', help='trained weights'
 
+#Output:
+FE_Model_analysis_1_heatmap.png
+FE_Model_analysis_1_overall_heatmap.png
+
 #- 2. select genes along one principle component for a specific primary capsule according to the heatmap
 
 python FE_Model_analysis_2.py
@@ -100,6 +104,11 @@ python FE_Model_analysis_2.py
 #'--PC', type=int, default=1, help='indicate which principle component will be analyzed '
 #'--Primary_capsule', type=int, default=4, help='indicate which primary capsule will be analyzed'
 #'--Cell_type', type=int, default=-1, help='indicate which cell type will be analyzed'
+
+#Output:
+Max2Min_genes.npy
+Min2Max_genes.npy
+FE_Model_analysis_2_resutls.png
 ```
 
 **3. Comparison Model**

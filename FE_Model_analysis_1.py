@@ -24,7 +24,7 @@ parser.add_argument('--num_capsule', type=int, default=16, help='number of the p
 parser.add_argument('--weights', type=str, default='Modelweight.weights', help='trained weights')
 
 args = parser.parse_args()
-
+print("Loading...")
 inputdata = args.inputdata
 inputcelltype = args.inputcelltype
 num_classes = args.num_classes
@@ -63,7 +63,7 @@ model = Model(inputs=x_in, outputs=output)
 model.compile(loss=lambda y_true,y_pred: y_true*K.relu(0.9-y_pred)**2 + 0.25*(1-y_true)*K.relu(y_pred-0.1)**2,
               optimizer='adam',
               metrics=['accuracy'])
-model.summary()
+#model.summary()
 model.load_weights(args.weights)
 
 
@@ -84,7 +84,7 @@ for i in range(len(Y_pred)):
 
 total = np.zeros((num_classes,num_capsule))
 
-plt.figure(figsize=(20,9))
+plt.figure(figsize=(20,np.ceil(num_classes/4)*4))
 for i in range(num_classes):
     average = coupling_coefficients_value[i]/count[i]
     Lindex = i + 1
@@ -92,6 +92,7 @@ for i in range(num_classes):
     total[i] = average[i]
     df = DataFrame(np.asmatrix(average))
     heatmap = sns.heatmap(df)
+plt.savefig("FE_Model_analysis_1_heatmap.png")
 plt.show()
 
 ###################################################################################################
@@ -102,4 +103,5 @@ heatmap = sns.heatmap(df)
 
 plt.ylabel('Type capsule', fontsize=10)
 plt.xlabel('Primary capsule', fontsize=10)
+plt.savefig("FE_Model_analysis_1_overall_heatmap.png")
 plt.show()
