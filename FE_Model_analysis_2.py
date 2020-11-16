@@ -115,7 +115,7 @@ for j in range(31):
             rownum = x_new_test.shape[0]
             x_new_test[:, i] = np.zeros(rownum)
             #selected genes
-            if dotted_line<0:
+            if dotted_line < 0 and i not in select_genes:
                 select_genes.append(i)
 
     #print(gene_count)
@@ -197,7 +197,7 @@ for j in range(31):
             rownum = x_new_test.shape[0]
             x_new_test[:, i] = np.zeros(rownum)
             # selected genes
-            if dotted_line < 0:
+            if dotted_line < 0 and i not in select_genes:
                 select_genes.append(i)
 
     #print(gene_count)
