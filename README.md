@@ -11,6 +11,7 @@ This repository contains the official Keras implementation of:
 - conda 4.4.10
 - keras 2.2.4
 - tensorflow 1.11.0
+- establish the environment through code "conda create -n sccaps python=3.6 keras=2.2.4 tensorflow=1.11.0"
 
 
 **1. Model training**
